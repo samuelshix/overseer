@@ -37,6 +37,9 @@ h1 {
     font-family:'Lato';
     font-weight: 300;
 }
+.connect:hover {
+    box-shadow: 0 0 10px 10px rgba(160, 184, 212, 0.719);
+}
 .connected {
     background: -webkit-linear-gradient(180deg,rgba(238, 238, 238, 0) 5%, #333);
     -webkit-background-clip: text;
@@ -78,6 +81,11 @@ h1 {
       font-size: 2em !important;
     transition: .3s;
   }
+  .github {
+    background: -webkit-linear-gradient(18deg, rgba(173,169,240,1) 0%,  rgb(75, 100, 105) 100%);
+    -webkit-background-clip: text;
+    /* -webkit-text-fill-color: transparent; */
+  }
   .fa-github:hover {
-      color: rgb(82, 135, 201);
+      color: black;
   }
