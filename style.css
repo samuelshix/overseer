@@ -1,0 +1,83 @@
+body {
+    background: rgb(173,169,240);
+background: linear-gradient(18deg, rgba(173,169,240,1) 0%, rgba(205,205,255,1) 27%, rgba(233,251,255,1) 83%);
+background-repeat: no-repeat;
+height: 100vh;
+}
+* {
+    font-family:'Lato';
+}
+h2 {
+    font-family: 'Lato';
+    font-weight: 300;
+}
+h1 {
+    margin: .3em 0;
+    font-size: 5em;
+    font-family: 'Lato';
+    font-weight: 900;
+}
+.justify-content-center {
+    text-align: center;
+}
+.col-md-12 {
+    background: rgba(255, 255, 255, 0.219);
+    border: 1px solid black;
+    border-radius: 1em;
+    text-align: left;
+    padding: 1em;
+}
+.navbar {
+    background-color: rgb(255, 255, 255);
+    z-index: 3;
+}
+.connect{
+    margin-left: auto!important;
+    font-size: 1.3em;
+    font-family:'Lato';
+    font-weight: 300;
+}
+.connected {
+    background: -webkit-linear-gradient(180deg,rgba(238, 238, 238, 0) 5%, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.btn {
+    border: none;
+}
+.err-msg {
+    margin:0;
+    margin-left: auto;
+    color: rgb(194, 1, 1);
+}
+.btn {
+    
+}
+
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: block; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(6px);
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    transition: 5s;
+  }
+  .overlayed {
+    backdrop-filter: blur(0px) !important;
+  }
+  .fa-github {
+      /* float: left; */
+      position: absolute;
+      left: .5em;
+      top: 25%;
+      font-size: 2em !important;
+    transition: .3s;
+  }
+  .fa-github:hover {
+      color: rgb(82, 135, 201);
+  }

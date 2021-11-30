@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "coingecko-api": "^1.0.10",
+    "web3": "^1.6.1"
+  }
+}
