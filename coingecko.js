@@ -1,7 +1,7 @@
 async function coinList() {
   return fetch('https://api.coingecko.com/api/v3/coins/list')
   .then(response => {return response.json()})
-  .then(data => {return data.map(function(value,index) {return value.symbol;});
+  .then(data => {return data.map(function(value,index) {return [value.symbol,value.id];});
 })
 }
 

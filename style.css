@@ -68,7 +68,7 @@ h1 {
     bottom: 0;
     backdrop-filter: blur(6px);
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    transition: 5s;
+    transition: 1s;
   }
   .overlayed {
     backdrop-filter: blur(0px) !important;
@@ -80,7 +80,9 @@ h1 {
       top: 25%;
       font-size: 2em !important;
     transition: .3s;
+    color:black;
   }
+
   .github {
     background: -webkit-linear-gradient(18deg, rgba(173,169,240,1) 0%,  rgb(75, 100, 105) 100%);
     -webkit-background-clip: text;

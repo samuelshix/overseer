@@ -16,8 +16,8 @@ async function getAccount() {
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
     let account = accounts[0].slice(0,8)+'...'
     connectButton.innerHTML = account
-    account = '0x5AA3393e361C2EB342408559309b3e873CD876d6'
-    fetch('http://api.ethplorer.io/getAddressInfo/'+account+'?apiKey=freekey')
+    // account = '0x5AA3393e361C2EB342408559309b3e873CD876d6'
+    fetch('http://api.ethplorer.io/getAddressInfo/'+accounts[0]+'?apiKey=freekey')
     .then(response => response.json())
     .then(data =>
       parseData(data)
@@ -32,29 +32,27 @@ async function getAccount() {
 //       console.log(data)
 //     );
 async function parseData(data) {
-  let totalVal = 0
   const balance = document.querySelector('.t-balance');
   let dbalance = document.querySelector('.d-balance')
   // balance.appendChild(ethBalance);
-
-  // now for the rest of the tokens
+  console.log(data)
   coinList().then((coinList)=>{
-    getCoins(data,coinList,totalVal,dbalance).then((arr)=>{
-      dbalance.innerHTML = round(totalVal)
-      console.log(arr)
-      let sortedArr = arr.sort(sort2d)
-      for (let i = 0; i < sortedArr.length; i++) {
-        balance.appendChild(sortedArr[i][1])
-      }
-    })
-})
+    getCoins(data,coinList,dbalance)
+  })
 };
 // map(function(value,index) {return value.id;}
+// wrapper function
 async function innerCoinList() {
   let coinList = await coinList()
 }
-async function getCoins(data,coinList,totalVal,dbalance) {
+
+async function getCoins(data,coinList,dbalance) {
+  const balance = document.querySelector('.t-balance');
   let arr = []
+  let totalVal = 0
+  let symbols = coinList.map(function(value){return value[0].toLowerCase()})
+  let ids = coinList.map(function(value){return value[1]})
+  // console.log(coinList)
   // Ethereum is handled differently under the ethplorer API
   const ethBalance = document.createElement('div');
   let ethPrice = await coinPrice('ethereum')
@@ -62,23 +60,28 @@ async function getCoins(data,coinList,totalVal,dbalance) {
   totalVal += ethVal
   ethBalance.innerHTML = 'Ethereum: ' + round(data.ETH.balance).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ($'+round(ethVal)+')';
   arr.push([ethVal,ethBalance])
+  // balance.appendChild(ethBalance)
+  console.log(ids)
   for (let i = 0; i < data.tokens.length; i++) {
-    let name = data.tokens[i].tokenInfo.symbol;
-    if (coinList.includes(name)) {
+    let name = data.tokens[i].tokenInfo.name.toLowerCase().replace(' ','-');
+    if (ids.includes(name)) {
+        let name = data.tokens[i].tokenInfo.name.toLowerCase().replace(' ','-');
+        console.log(name)
         let token = document.createElement('div');
         let bal = data.tokens[i].balance/(10**parseInt(data.tokens[i].tokenInfo.decimals));
-        let price = await coinPrice(name);
-        let val = bal * price;
-        if (val > 0 && val !== undefined) {
-          totalVal+=val
-          token.innerHTML = (data.tokens[i].tokenInfo.name) +": "+ round(bal)+" ($"+round(val)+")"
-          arr.push([val,token])
-          // balance.appendChild(token);
-          dbalance.innerHTML = round(totalVal)
-        }
+        await coinPrice(ids.filter(function(value){return value==name})).then(price=>{
+          let val = bal * price;
+            totalVal+=val
+            token.innerHTML = (data.tokens[i].tokenInfo.name) +": "+ round(bal)+" ($"+round(val)+")"
+            arr.push([val,token])
+            dbalance.innerHTML = "$"+round(totalVal).toString()
+        }).catch(err=>{return});
       }
   }
-  return arr
+  let sortedArr = arr.sort(sort2d)
+  for (let i = 0; i < arr.length; i++) {
+    balance.appendChild(sortedArr[i][1])
+  }
 };
 
 function round(x) {
@@ -91,6 +94,6 @@ function sort2d(a, b) {
       return 0;
   }
   else {
-      return (a[0] < b[0]) ? 1 : -1;
+      return (a[0] > b[0]) ? -1 : 1;
   }
 }
