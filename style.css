@@ -2,12 +2,12 @@ body {
     background: rgb(173,169,240);
 background: linear-gradient(18deg, rgba(173,169,240,1) 0%, rgba(205,205,255,1) 27%, rgba(233,251,255,1) 83%);
 background-repeat: no-repeat;
-height: 100vh;
+min-height: 120vh;
 }
 * {
     font-family:'Lato';
 }
-h2 {
+h2,p {
     font-family: 'Lato';
     font-weight: 300;
 }
@@ -28,7 +28,7 @@ h1 {
     padding: 1em;
 }
 .navbar {
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.637);
     z-index: 3;
 }
 .connect{
@@ -90,4 +90,17 @@ h1 {
   }
   .fa-github:hover {
       color: black;
+  }
+  .title {
+      position:absolute;
+      width: 6em;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      top: 1em;
+      text-align: center;
+      font-weight: 900;
+      border: 1px solid black;
+      border-radius: .5em;
   }

@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "chart.js": "^3.6.2",
     "coingecko-api": "^1.0.10",
     "web3": "^1.6.1"
-  }
+  },
+  "type": "module"
 }
